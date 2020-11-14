@@ -9,4 +9,21 @@ If you need a simple drop in auth controller that gets you started but is easy t
 
 Dowload the package and extract to your project route. There are no files that will be overwritten, we will change those manually so this can be dropped into an existing project without messing everything up.
 
-..more to be added soon
+## Add Routes
+
+Add routes to 
+
+```
+App\Config\Routes.php
+``
+
+```php
+$routes->get('/', 'Auth::index');
+$routes->get('logout', 'Auth::logout');
+$routes->match(['get', 'post'], 'login', 'Auth::login', ['filter' => 'noauth']);
+$routes->match(['get','post'],'register', 'Auth::register', ['filter' => 'noauth']);
+$routes->match(['get', 'post'], 'profile', 'Auth::profile', ['filter' => 'auth']);
+$routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
+```
+
+

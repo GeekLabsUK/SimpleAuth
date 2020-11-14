@@ -45,4 +45,5 @@ Password : password
 ## Test
 everything should be working by default, head over to /login and login with the above credentials
 
+..more info coming soon
 

@@ -35,4 +35,14 @@ Import :
 db.sql
 ```
 
+The database is seeded 1 with 1 user to start. The role is set to 1 'super admin' any new registrations get set to '2' by default.
+
+```
+Email : admin@admin.com
+Password : password
+```
+
+## Test
+everything should be working by default, head over to /login and login with the above credentials
+
 

@@ -1,0 +1,31 @@
+body {
+    background-color: #e1e1e1;
+}
+
+.form-wrapper {
+    border-radius: 10px;
+}
+
+.form-wrapper label {
+    font-weight: bold;
+}
+
+.errors li {
+    list-style: none;
+    width: 100%;
+    text-align: center;
+}
+
+.errors ul {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+
+
+@media (max-width: 768px) {
+    .form-wrapper .text-right {
+
+        text-align: center !important;
+    }
+}

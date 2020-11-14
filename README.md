@@ -26,4 +26,13 @@ $routes->match(['get', 'post'], 'profile', 'Auth::profile', ['filter' => 'auth']
 $routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
 ```
 
+## Import database
+
+As a minium you need the users table, a new user_role table as also been added to facilitate role base authorisation. 
+Import :
+
+```
+db.sql
+```
+
 

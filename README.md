@@ -1,9 +1,71 @@
 # SimpleAuth
 A simple Auth library for Codeigniter 4
 
-Designed to be a boilerplate Auth Controller as apposed to a fully fledged Auth Library. We already have IonAuth and Myth Auth for that.
+SimpleAuth is small lightweight Auth library for Codeigniter 4 with powerfull features
 
-If you need a simple drop in auth controller that gets you started but is easy to customise, extend and do what ever your want with then SimpleAuth is for you.
+Designed to be easy to instal, customise and expand upon. Using a modular approach its easy to to use all of the library or just the bits you need making it very flexible and easy to integrate.
+
+## Features
+
+* User Registration
+* User Login
+* User Forgot Password
+* User Edit Profile
+* Remember Me (Optional)
+* Activate Account Emails (Optional)
+* Lock Screen (Optional)
+* Role Management
+* Auto Role Redirecting / Routing
+* Debug Bar Addon (Optional)
+* Basic Bootstrap Starter Template
+
+
+## Folder / File Structure
+
+```bash
+├── app
+│   ├── Collectors
+│   │   ├── Auth.php (For Debug Bar)
+│   ├── Config
+|   |   ├── Auth.php
+│   ├── Controllers
+│   |   ├── Auth.php
+|   |   ├── Dashboard.php
+|   |   ├── Superadmin.php
+|   |   ├── Home.php
+│   ├── Filters
+│   │   ├── Auth.php
+|   ├── Language
+|   |   ├── Auth.php
+|   ├── Libraries
+|   |   ├── AuthLibrary.php
+|   |   ├── SendEmail.php
+|   ├── Models
+|   |   ├── AuthModel.php
+|   ├── Validation
+|   |   ├── AuthRules.php
+|   ├── Views
+|   |   ├── Emails
+|   |   |   ├── activateaccount.php
+|   |   |   ├── forgotpassword.php
+|   |   ├── Templates
+|   |   |   ├── header.php
+|   |   |   ├── footer.php
+|   |   ├── dashboard.php
+|   |   ├── forgotpassword.php
+|   |   ├── home.php
+|   |   ├── lockscreen.php
+|   |   ├── login.php
+|   |   ├── profile.php
+|   |   ├── register.php
+|   |   ├── resetpassword.php
+|   |   ├── superadmin.php
+├── Public
+    ├── Assets
+        ├── css
+            ├── custom.css
+```
+
 
 ## Instalation
 

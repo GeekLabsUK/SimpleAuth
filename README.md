@@ -63,45 +63,56 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
 
 
 
-## Instalation
+## Manual Instalation
 
-Dowload the package and extract to your project route. There are no files that will be overwritten, we will change those manually so this can be dropped into an existing project without messing everything up.
+* Composer Instalation coming soon
 
-## Add Routes
+Dowload the package and extract into your project route. There are no files that will be overwritten, we will change those manually so this can be dropped into an existing project without messing everything up.
 
-Add routes to 
+### Import Database
 
-```
-App\Config\Routes.php
-```
-
-```php
-$routes->get('/', 'Auth::index');
-$routes->get('logout', 'Auth::logout');
-$routes->match(['get', 'post'], 'login', 'Auth::login', ['filter' => 'noauth']);
-$routes->match(['get','post'],'register', 'Auth::register', ['filter' => 'noauth']);
-$routes->match(['get', 'post'], 'profile', 'Auth::profile', ['filter' => 'auth']);
-$routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
-```
-
-## Import database
-
-As a minium you need the users table, a new user_role table as also been added to facilitate role base authorisation. 
-Import :
-
+Create your database and import
 ```
 db.sql
 ```
 
-The database is seeded 1 with 1 user to start. The role is set to 1 'super admin' any new registrations get set to '2' by default.
+## Configuration
+
+SimpleAuth comes with a configoration file located at
+```
+app/config/Auth.php
+```
+The config file is well documented. Take a look through and make any changes or leave it as default setting to test.
+
+You will need to add the SimpleAuth filter to the Filters config file
+```
+app/config/Filters.php
+```
+
+Add the following line to the $aliases array
 
 ```
-Email : admin@admin.com
-Password : password
+'auth'     => \App\Filters\Auth::class,	
 ```
 
-## Test
-everything should be working by default, head over to /login and login with the above credentials
+Add the SimpleAuth validator to Validation config file
 
-..more info coming soon
+```
+app/config/Validation.php
+```
+Add the following line to the $ruleSets array
+
+```
+\App\Validation\AuthRules::class,
+```
+
+
+
+
+
+
+
+
+
+
 

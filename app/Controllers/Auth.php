@@ -1,5 +1,20 @@
 <?php
 
+/**
+ * --------------------------------------------------------------------
+ * CODEIGNITER 4 - SimpleAuth
+ * --------------------------------------------------------------------
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * @package    SimpleAuth
+ * @author     GeekLabs - Lee Skelding 
+ * @license    https://opensource.org/licenses/MIT	MIT License
+ * @link       https://github.com/GeekLabsUK/SimpleAuth
+ * @since      Version 1.0
+ * 
+ */
+
 namespace App\Controllers;
 
 use App\Models\AuthModel;
@@ -36,7 +51,9 @@ class Auth extends BaseController
 	*/
 	public function login()
 	{
-		// CHECK IF COOKIE IS SET
+		
+
+        // CHECK IF COOKIE IS SET
 		$this->Auth->checkCookie();
 
 		// IF ITS A POST REQUEST DO YOUR STUFF ELSE SHOW VIEW
@@ -73,13 +90,7 @@ class Auth extends BaseController
 				$result = $this->Auth->Loginuser($email, $rememberMe);
 
 				// CHECK RESULT REDIRECT TO DASHBOARD IF TRUE OR BACK TO LOGIN IF FALSE
-				if($result){
-					
-					return redirect()->to('dashboard');
-
-				}
-
-				return redirect()->to('dashboard');
+				return redirect()->to($result);
 				
 			}
 		}
@@ -128,8 +139,7 @@ class Auth extends BaseController
 					'firstname' => $this->request->getVar('firstname'),
 					'lastname' => $this->request->getVar('lastname'),
 					'email' => $this->request->getVar('email'),
-					'password' => $this->request->getVar('password'),
-					'role' => '2',
+					'password' => $this->request->getVar('password'),					
 				];				
 
 				// REGISTER USER
@@ -320,8 +330,8 @@ class Auth extends BaseController
 		$id = $this->Auth->resetPassword($id, $token);
 		
 		// REDIRECT PASSING USER ID TO UPDATE PASSWORD FORM
-		return redirect()->to('/updatepassword/'.$id);
-			
+		$this->updatepassword($id);
+				
 		
 	}
 
@@ -417,8 +427,6 @@ class Auth extends BaseController
                 }
             }
 
-        
-
             echo view('templates/header');
             echo view('lockscreen');
             echo view('templates/footer');
@@ -443,5 +451,12 @@ class Auth extends BaseController
 		$this->Auth->logout();
 
 		return redirect()->to('/');
+	}
+
+	public function accessdenied()
+	{
+		
+		echo view('error');
+		
 	}
 }

@@ -1,6 +1,9 @@
 body {
     background-color: #e1e1e1;
 }
+li{
+    list-style: none;
+}
 
 .form-wrapper {
     border-radius: 10px;

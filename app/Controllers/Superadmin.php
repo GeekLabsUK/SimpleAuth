@@ -15,16 +15,16 @@
  * 
  */
 
-namespace App\Controllers;
+ namespace App\Controllers;
 
-class Dashboard extends BaseController
+class Superadmin extends BaseController
 {
 	public function index()
 	{
 		$data = [];
 
 		echo view('templates/header', $data);
-		echo view('dashboard');
+		echo view('superadmin');
 		echo view('templates/footer');
 	}
 

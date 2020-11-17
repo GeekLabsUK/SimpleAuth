@@ -1,11 +1,28 @@
-<?php namespace App\Models;
+<?php
+
+/**
+ * --------------------------------------------------------------------
+ * CODEIGNITER 4 - SimpleAuth
+ * --------------------------------------------------------------------
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * @package    SimpleAuth
+ * @author     GeekLabs - Lee Skelding 
+ * @license    https://opensource.org/licenses/MIT	MIT License
+ * @link       https://github.com/GeekLabsUK/SimpleAuth
+ * @since      Version 1.0
+ * 
+ */
+
+namespace App\Models;
 
 use CodeIgniter\Model;
 
 class AuthModel extends Model{
 
     protected $table = 'users';
-    protected $allowedFields = ['firstname', 'lastname', 'email', 'password', 'role', 'updated_at', 'deleted_at'];
+    protected $allowedFields = ['firstname', 'lastname', 'email', 'password', 'reset_token', 'reset_expire', 'activated', 'activate_token', 'activate_expire', 'role', 'updated_at', 'deleted_at'];
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];
 
@@ -32,6 +49,8 @@ class AuthModel extends Model{
         return $data;
 
     }
+
+   
 
 
 }

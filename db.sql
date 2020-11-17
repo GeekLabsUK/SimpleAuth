@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 14, 2020 at 09:07 PM
+-- Generation Time: Nov 17, 2020 at 11:33 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.4.9
 
@@ -24,6 +24,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `auth_tokens`
+--
+
+DROP TABLE IF EXISTS `auth_tokens`;
+CREATE TABLE IF NOT EXISTS `auth_tokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `selector` varchar(255) NOT NULL,
+  `hashedvalidator` varchar(255) NOT NULL,
+  `expires` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -34,19 +50,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lastname` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `reset_token` varchar(250) NOT NULL,
+  `reset_expire` datetime DEFAULT NULL,
+  `activated` tinyint(1) NOT NULL,
+  `activate_token` varchar(250) DEFAULT NULL,
+  `activate_expire` varchar(250) DEFAULT NULL,
   `role` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'lee', 'Skelding', 'admin@admin.com', '$argon2id$v=19$m=65536,t=4,p=1$UkZNQWJOTHprbWhBVmoxYw$4pvFQ//NT8VGWp/nmZabbsUGZxJRVUSimgW1CMP4IeU', 1, '2020-11-14 18:09:50', '2020-11-14 18:09:50', NULL);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -59,15 +73,7 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user_roles`
---
-
-INSERT INTO `user_roles` (`id`, `role_name`) VALUES
-(1, 'SuperAdmin'),
-(2, 'Default');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -12,6 +12,7 @@
 
 <body>
     <?php $uri = service('uri') ?>
+    <?php $config = config('Auth'); ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">Login System</a>
@@ -31,6 +32,11 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav my-2 my-lg-0">
+                        <?php if ($config->lockScreen) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/lockscreen">Lock </a>
+                        </li>
+                        <?php endif; ?>
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">Logout </a>
                         </li>

@@ -22,48 +22,49 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
 
 ## Folder / File Structure
 
-```bash
-├── app
-│   ├── Collectors
-│   │   ├── Auth.php (For Debug Bar)
-│   ├── Config
-|   |   ├── Auth.php
-│   ├── Controllers
-│   |   ├── Auth.php
-|   |   ├── Dashboard.php
-|   |   ├── Superadmin.php
-|   |   ├── Home.php
-│   ├── Filters
-│   │   ├── Auth.php
-|   ├── Language
-|   |   ├── Auth.php
-|   ├── Libraries
-|   |   ├── AuthLibrary.php
-|   |   ├── SendEmail.php
-|   ├── Models
-|   |   ├── AuthModel.php
-|   ├── Validation
-|   |   ├── AuthRules.php
-|   ├── Views
-|   |   ├── Emails
-|   |   |   ├── activateaccount.php
-|   |   |   ├── forgotpassword.php
-|   |   ├── Templates
-|   |   |   ├── header.php
-|   |   |   ├── footer.php
-|   |   ├── dashboard.php
-|   |   ├── forgotpassword.php
-|   |   ├── home.php
-|   |   ├── lockscreen.php
-|   |   ├── login.php
-|   |   ├── profile.php
-|   |   ├── register.php
-|   |   ├── resetpassword.php
-|   |   ├── superadmin.php
-├── Public
-    ├── Assets
-        ├── css
-            ├── custom.css
+```
+# app
+
+* [Collectors/](.\app\Collectors)
+  * [Auth.php](.\app\Collectors\Auth.php)
+* [Config/](.\app\Config)
+  * [Auth.php](.\app\Config\Auth.php)
+  
+* [Controllers/](.\app\Controllers)
+  * [Auth.php](.\app\Controllers\Auth.php)
+  * [Dashboard.php](.\app\Controllers\Dashboard.php)
+  * [Home.php](.\app\Controllers\Home.php)
+  * [Superadmin.php](.\app\Controllers\Superadmin.php)
+* [Filters/](.\app\Filters)
+  * [Auth.php](.\app\Filters\Auth.php)
+* [Language/](.\app\Language)
+  * [en/](.\app\Language\en)
+    * [Auth.php](.\app\Language\en\Auth.php)
+* [Libraries/](.\app\Libraries)
+  * [AuthLibrary.php](.\app\Libraries\AuthLibrary.php)
+  * [SendEmail.php](.\app\Libraries\SendEmail.php)
+* [Models/](.\app\Models)
+  * [AuthModel.php](.\app\Models\AuthModel.php)
+* [Validation/](.\app\Validation)
+  * [AuthRules.php](.\app\Validation\AuthRules.php)
+* [Views/](.\app\Views)
+  * [emails/](.\app\Views\emails)
+    * [activateaccount.php](.\app\Views\emails\activateaccount.php)
+    * [forgotpassword.php](.\app\Views\emails\forgotpassword.php)
+  * [templates/](.\app\Views\templates)
+    * [footer.php](.\app\Views\templates\footer.php)
+    * [header.php](.\app\Views\templates\header.php)
+  * [dashboard.php](.\app\Views\dashboard.php)
+  * [forgotpassword.php](.\app\Views\forgotpassword.php)
+  * [home.php](.\app\Views\home.php)
+  * [lockscreen.php](.\app\Views\lockscreen.php)
+  * [login.php](.\app\Views\login.php)
+  * [profile.php](.\app\Views\profile.php)
+  * [register.php](.\app\Views\register.php)
+  * [resetpassword.php](.\app\Views\resetpassword.php)
+  * [superadmin.php](.\app\Views\superadmin.php)
+
+
 ```
 
 

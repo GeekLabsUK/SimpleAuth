@@ -22,8 +22,6 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
 
 ## Folder / File Structure
 
-```
-# app
 
 * [Collectors/](.\app\Collectors)
   * [Auth.php](.\app\Collectors\Auth.php)
@@ -64,8 +62,6 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
   * [resetpassword.php](.\app\Views\resetpassword.php)
   * [superadmin.php](.\app\Views\superadmin.php)
 
-
-```
 
 
 ## Instalation

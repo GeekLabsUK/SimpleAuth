@@ -26,7 +26,7 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
 * Collectors
     * Auth.php
 * Config
-    * Auth.php  
+    * Auth.php
 * Controllers
     * Auth.php
     * Dashboard.php
@@ -35,8 +35,8 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
 * Filters
     * Auth.php
 * Language
-  * en
-    * Auth.php
+  * en    
+   * Auth.php
 * Libraries
     * AuthLibrary.php
     * SendEmail.php
@@ -46,20 +46,20 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
     * AuthRules.php
 * Views
   * emails
-    * activateaccount.php
-    * forgotpassword.php
+   * activateaccount.php
+   * forgotpassword.php
   * templates
-    * footer.php
-    * header.php
-    * dashboard.php
-    * forgotpassword.php
-    * home.php
-    * lockscreen.php
-    * login.php
-    * profile.php
-    * register.php
-    * resetpassword.php
-    * superadmin.php
+   * footer.php
+   * header.php
+   * dashboard.php
+   * forgotpassword.php
+   * home.php
+   * lockscreen.php
+   * login.php
+   * profile.php
+   * register.php
+   * resetpassword.php
+   * superadmin.php
 
 
 

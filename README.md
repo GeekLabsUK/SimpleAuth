@@ -34,9 +34,9 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
   * Superadmin.php
 * Filters
   * Auth.php
-*[Language
+* Language
   * en
-    * Auth.php
+   * Auth.php
 * Libraries
   * AuthLibrary.php
   * SendEmail.php
@@ -46,11 +46,11 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
   * AuthRules.php
 * Views
   * emails
-    * activateaccount.php
-    * forgotpassword.php
+   * activateaccount.php
+   * forgotpassword.php
   * templates
-    * footer.php
-    * header.php
+   * footer.php
+   * header.php
   * dashboard.php
   * forgotpassword.php
   * home.php

@@ -23,15 +23,15 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
 ## Folder / File Structure
 
 
-* [Collectors/](.\app\Collectors)
-  * [Auth.php](.\app\Collectors\Auth.php)
-* [Config/](.\app\Config)
-  * [Auth.php](.\app\Config\Auth.php)
+* [Collectors/]
+  * [Auth.php]
+* [Config/]
+  * [Auth.php]
   
-* [Controllers/](.\app\Controllers)
-  * [Auth.php](.\app\Controllers\Auth.php)
-  * [Dashboard.php](.\app\Controllers\Dashboard.php)
-  * [Home.php](.\app\Controllers\Home.php)
+* [Controllers/]
+  * [Auth.php]
+  * [Dashboard.php]
+  * [Home.php]
   * [Superadmin.php](.\app\Controllers\Superadmin.php)
 * [Filters/](.\app\Filters)
   * [Auth.php](.\app\Filters\Auth.php)

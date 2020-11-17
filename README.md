@@ -24,42 +24,42 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
 
 
 * Collectors
-  * Auth.php
+    * Auth.php
 * Config
-  * Auth.php  
+    * Auth.php  
 * Controllers
-  * Auth.php
-  * Dashboard.php
-  * Home.php
-  * Superadmin.php
+    * Auth.php
+    * Dashboard.php
+    * Home.php
+    * Superadmin.php
 * Filters
-  * Auth.php
+    * Auth.php
 * Language
   * en
-   * Auth.php
+    * Auth.php
 * Libraries
-  * AuthLibrary.php
-  * SendEmail.php
+    * AuthLibrary.php
+    * SendEmail.php
 * Models
-  * AuthModel.php
+    * AuthModel.php
 * Validation
-  * AuthRules.php
+    * AuthRules.php
 * Views
   * emails
-   * activateaccount.php
-   * forgotpassword.php
+    * activateaccount.php
+    * forgotpassword.php
   * templates
-   * footer.php
-   * header.php
-  * dashboard.php
-  * forgotpassword.php
-  * home.php
-  * lockscreen.php
-  * login.php
-  * profile.php
-  * register.php
-  * resetpassword.php
-  * superadmin.php
+    * footer.php
+    * header.php
+    * dashboard.php
+    * forgotpassword.php
+    * home.php
+    * lockscreen.php
+    * login.php
+    * profile.php
+    * register.php
+    * resetpassword.php
+    * superadmin.php
 
 
 

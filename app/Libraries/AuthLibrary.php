@@ -541,19 +541,22 @@ class AuthLibrary
         $user = $this->AuthModel->where('email', $email)
             ->first();
 
-        // BUILD DATA TO ADD TO auth_logins TABLE
-        $logdata = [
-            'user_id' => $user['id'],
-            'firstname' => $user['firstname'],
-            'lastname' => $user['lastname'],
-            'role' => $user['role'],
-            'ip_address' => $this->request->getIPAddress(),
-            'date' => new Time('now'),
-            'successfull' => '0',
-        ];
+        if (!empty($user)) {
 
-        // SAVE LOG DATA TO DB
-        $this->AuthModel->LogLogin($logdata);            
+            // BUILD DATA TO ADD TO auth_logins TABLE
+            $logdata = [
+                'user_id' => $user['id'],
+                'firstname' => $user['firstname'],
+                'lastname' => $user['lastname'],
+                'role' => $user['role'],
+                'ip_address' => $this->request->getIPAddress(),
+                'date' => new Time('now'),
+                'successfull' => '0',
+            ];
+
+            // SAVE LOG DATA TO DB
+            $this->AuthModel->LogLogin($logdata);
+        }
     }
 
     /**

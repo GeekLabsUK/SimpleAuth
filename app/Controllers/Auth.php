@@ -73,23 +73,21 @@ class Auth extends BaseController
 			];
 
 			if (!$this->validate($rules, $errors)) {
+
 				$data['validation'] = $this->validator;
-			} else {
 
-				// GET EMAIL FROM POST
+				$this->Auth->loginlogFail($this->request->getVar('email'));
+
+			} else {				
+
+				// GET EMAIL & REMEMBER ME FROM POST
 				$email = $this->request->getVar('email');
-				$rememberMe = $this->request->getVar('rememberme');
-
-				$data = [
-					'rememberme' => $rememberMe,
-				];
-
-				$this->Session->set($data);
+				$rememberMe = $this->request->getVar('rememberme');			
 
 				// LOG USER IN USING EMAIL
 				$result = $this->Auth->Loginuser($email, $rememberMe);
 
-				// CHECK RESULT REDIRECT TO DASHBOARD IF TRUE OR BACK TO LOGIN IF FALSE
+				// REDIRECT 
 				return redirect()->to($result);
 				
 			}

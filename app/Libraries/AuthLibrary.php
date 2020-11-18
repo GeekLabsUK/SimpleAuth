@@ -23,6 +23,8 @@ use App\libraries\SendEmail;
 use Config\Auth;
 use Config\Email;
 use Config\App;
+use \Config\Services;
+    
 
 
 class AuthLibrary
@@ -35,6 +37,8 @@ class AuthLibrary
         $this->emailconfig = new Email;
         $this->AppConfig = new App;
         $this->Session = session();
+        $this->request = Services::request();
+        
     }
 
     /*
@@ -126,10 +130,10 @@ class AuthLibrary
         if ($this->config->rememberMe && $rememberMe == '1') {
 
             $this->rememberMe($userID);
-        }
+        }       
 
         //SET USER SESSION 
-        $this->setUserSession($user);
+        $this->setUserSession($user, $rememberMe);
 
         // AUTO REDIRECTS BASED ON ROLE
         $role = session()->get('role');
@@ -473,9 +477,8 @@ class AuthLibrary
      * @param  array $user
      * @return void
      */
-    public function setUserSession($user)
-    {
-
+    public function setUserSession($user, $rememberMe)
+    {    
         $data = [
             'id' => $user['id'],
             'firstname' => $user['firstname'],
@@ -483,11 +486,77 @@ class AuthLibrary
             'email' => $user['email'],
             'role' => $user['role'],
             'isLoggedIn' => true,
+            'ipaddress' => $this->request->getIPAddress(),
+            'rememberme' => $rememberMe,
 
         ];
 
         $this->Session->set($data);
+        $this->loginlog();
+
         return true;
+    }
+
+    /**
+     *--------------------------------------------------------------------------
+     * lOG LOGIN 
+     *--------------------------------------------------------------------------
+     *
+     * Logs users login session to DB
+     * 
+     * @return void
+     */
+    public function loginlog(){
+
+        // LOG THE LOGIN IN DB
+        if ($this->Session->get('isLoggedIn')) {
+
+            // BUILD DATA TO ADD TO auth_logins TABLE
+            $logdata = [
+                'user_id' => $this->Session->get('id'),
+                'firstname' => $this->Session->get('firstname'),
+                'lastname' => $this->Session->get('lastname'),
+                'role' => $this->Session->get('role'),
+                'ip_address' => $this->request->getIPAddress(),
+                'date' => new Time('now'),
+                'successfull' => '1',
+            ];
+
+            // SAVE LOG DATA TO DB
+            $this->AuthModel->LogLogin($logdata);
+        }
+
+    }
+
+    /**
+     *--------------------------------------------------------------------------
+     * lOG LOGIN FAILURE
+     *--------------------------------------------------------------------------
+     *
+     * If user login / verification failed log an unsuccesfull login attempt
+     * 
+     * @param  mixed $email
+     * @return void
+     */
+    public function loginlogFail($email)
+    {
+        // FIND USER BY EMAIL
+        $user = $this->AuthModel->where('email', $email)
+            ->first();
+
+        // BUILD DATA TO ADD TO auth_logins TABLE
+        $logdata = [
+            'user_id' => $user['id'],
+            'firstname' => $user['firstname'],
+            'lastname' => $user['lastname'],
+            'role' => $user['role'],
+            'ip_address' => $this->request->getIPAddress(),
+            'date' => new Time('now'),
+            'successfull' => '0',
+        ];
+
+        // SAVE LOG DATA TO DB
+        $this->AuthModel->LogLogin($logdata);            
     }
 
     /**
@@ -525,21 +594,25 @@ class AuthLibrary
             'selector' => $selector,
             'hashedvalidator' => hash('sha256', $validator),
             'expires' => date('Y-m-d H:i:s', $expires),
-        ];
+        ];        
 
-        // SAVE TO DB
-        $db = \Config\Database::connect();
-        $builder = $db->table('auth_tokens');
+        // CHECK IF A USER ID ALREADY HAS A TOKEN SET
+        //
+        // We dont really want to have multiple tokens and selectors for the
+        // same user id. there is no need as the validator gets updated on each login
+        // so check if there is a token already and overwrite if there is.
+        // should keep DB maintenance down a bit and remove the need to do sporadic purges.
+        //
 
-        $result = $builder->where('user_id', $userID)
-            ->get()
-            ->getRow();
+        $result = $this->AuthModel->GetAuthTokenByUserId($userID);
 
+        // IF NOT INSERT
         if (empty($result)) {
-
-            $builder->insert($data);
-        } else {
-            $builder->update($data);
+            $this->AuthModel->insertToken($data);
+        } 
+        // IF HAS UPDATE
+        else {
+            $this->AuthModel->updateToken($data);
         }
 
         // set_Cookie
@@ -586,12 +659,7 @@ class AuthLibrary
         [$selector, $validator] = explode(':', $remember);
         $validator = hash('sha256', $validator);
 
-        // DB QUERY
-        $db = \Config\Database::connect();
-        $builder = $db->table('auth_tokens');
-        $token = $builder->where('selector', $selector)
-            ->get()
-            ->getRow();
+        $token = $this->AuthModel->GetAuthTokenBySelector($selector);
 
         // NO ENTRY FOUND
         if (empty($token)) {
@@ -624,15 +692,15 @@ class AuthLibrary
             // DELETE THE TOKEN FROM THE DB
 
             if (rand(1, 100) < $this->config->forceLogin) {
-                $builder->where('user_id', $token->user_id)
-                    ->delete();
+
+                $this->AuthModel->DeleteTokenByUserId($token->user_id);               
 
                 return;
             }
         }
 
         // SET USER SESSION
-        $this->setUserSession($user);
+        $this->setUserSession($user, '1');
 
         $userID = $token->user_id;
 
@@ -655,12 +723,8 @@ class AuthLibrary
      */
     public function rememberMeReset($userID, $selector)
     {
-        // DB QUERY
-        $db = \Config\Database::connect();
-        $builder = $db->table('auth_tokens');
-        $existingToken = $builder->where('selector', $selector)
-            ->get()
-            ->getRow();
+        // DB QUERY        
+        $existingToken = $this->AuthModel->GetAuthTokenBySelector($selector);
 
         if (empty($existingToken)) {
 
@@ -687,8 +751,7 @@ class AuthLibrary
             ];
         }
 
-        $builder->where('selector', $selector)
-            ->update($data);
+       $this->AuthModel->UpdateSelector($data, $selector);
 
         // SET COOKIE        
         setcookie(
@@ -723,11 +786,8 @@ class AuthLibrary
      */
     public function logout()
     {
-        // REMOVE REMEMBER ME TOKEN FROM DB
-        $db = \Config\Database::connect();
-        $builder = $db->table('auth_tokens');
-        $builder->where('user_id', $this->Session->get('id'))
-            ->delete();
+        // REMOVE REMEMBER ME TOKEN FROM DB 
+        $this->AuthModel->DeleteTokenByUserId($this->Session->get('id'));
 
         //DESTROY SESSION
         $this->Session->destroy();

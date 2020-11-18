@@ -1,0 +1,13 @@
+{
+    "name": "skella/simple-auth",
+    "description": "SimplAuth for Codeigniter 4\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[Ce\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[Auth for Codeigniter 4",
+    "type": "library",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "Geeklabs",
+            "email": "geeklabsonline@gmail.com"
+        }
+    ],
+    "require": {}
+}

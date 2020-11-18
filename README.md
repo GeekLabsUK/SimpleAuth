@@ -5,6 +5,12 @@ SimpleAuth is small lightweight Auth library for Codeigniter 4 with powerfull fe
 
 Designed to be easy to instal, customise and expand upon. Using a modular approach its easy to to use all of the library or just the bits you need making it very flexible and easy to integrate.
 
+
+> Please note that SimpleAuth is still a works in progress. This V 1.0 release should be stable. Please report any bugs, if you experience any so i can get them fixed.
+
+> V 1.1 will be available soon and will include a Login Log, Limit Reset Attempts and Limit Login Attempts. Any other features you would like to see please let me know.
+
+
 ## Features
 
 * User Registration
@@ -110,6 +116,14 @@ Add the following line to the $ruleSets array
 \App\Validation\AuthRules::class,
 ```
 
+### Email Config
+
+SimpleAuth comes with a small email sending library to automatically set the email headers and parse a template file. In order for emails to work you need to ensure you have the fromEmail and fromName set in your Email config file
+
+```
+app/config/Email.php
+```
+
 ### Tool Bar (Optional)
 
 If you want to add the SimpleAuth tab to the Debug Tool bar you will need to add the SimpleAuth collector to the Toolbar config file
@@ -166,9 +180,50 @@ In the Auth.php config file you can define the roles set out in your DB. The rol
 
 We can also define the redirect routes that the user will be redirect to after login.
 
+Also set the default role for user registrations.
+
 ## Auth Controller
 
 The default Auth Contoller can be either be used as is or modified to suit your project. SimpleAuth has been designed to make it easy to customise and the majority of the logic is done in the AuthLibrary.php file. Your controller classes just pass over data, run functions etc as and when needed. In most cases there is no need to modify the Controller at all. 
+
+## Optional Features
+
+Some features of SimpleAuth are optional and can be turned on or off with the Auth.php config file.
+
+### Send Activation Email
+
+If set to true, SimpleAuth will send an email requesting the user to confirm their email address by clicking on an activation link. We can also specify the time before the Activation and Forgot password tokens expire. By default the Activation email token has an expiry of 24 hours and the password rest 1 hour.
+
+### Lock Screen
+
+If set to true an option to 'lock' the screen as oppsed to logging out. To log back in only the password is required. This feature is ideal for admin dashboards where staff may lock their screen to go to the toilet etc.
+
+### Remember me
+
+If set to true a remember me checkbox will be added to the login form. The remember me function uses the latest timing-attack safe proposed strategy - https://paragonie.com/blog/2015/04/secure-authentication-php-with-long-term-persistence
+
+The expiry date of the remember me cookie can also be defined. 
+
+You can also set the 'Remember Me Renew' setting to true or false. if set to true anytime the user visits the site and a cookie is found a new expiry date is set using the $rememberMeExpire setting above. Technically creating an infinate login session if the user is active on the site. The cookie will still expire after set days if user does not visit the site forcing a login. If set to false the user login cookie will expire and force a login within the expiry time set above regardless of how active they are on the site.
+
+### Force Login
+
+When using the remember me function it can be benifitial to force some user to login. This ensures they are still authorised and still know or remember their login credentials.
+The setting can be set from 0 - 100. A setting of 10 for example would have a 10% chance of forcing the user to login.
+
+### Hash Algorithm
+
+As Codeigniter 4 needs a min of PHP 7.2 we should be using the latest standards where possible. SimpleAuth uses the ARGON2ID hashing algorithm by default. This requires PHP 7.3 and must have been compiled with Argon2 support.
+
+It is reccomended to use Argon2 where possible but you can also use :
+
+* - PASSWORD_DEFAULT 
+* - PASSWORD_BCRYPT
+* - PASSWORD_ARGON2I  - As of PHP 7.2 
+* - PASSWORD_ARGON2ID - As of PHP 7.3 (default)
+
+
+
 
 
 

@@ -1,3 +1,5 @@
+https://www.code-inspector.com/project/16385/score/svg https://www.code-inspector.com/project/16385/status/svg
+
 # SimpleAuth
 A simple Auth library for Codeigniter 4
 

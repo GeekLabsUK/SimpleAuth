@@ -75,7 +75,7 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
 
 * Composer Instalation coming soon
 
-Dowload the package and extract into your project route. There are no files that will be overwritten, we will change those manually so this can be dropped into an existing project without messing everything up.
+Dowload the package and extract into your project route. There are no files that will be overwritten (Except for BaseController.php If you already have custom code inside your BaseController just add the helpers manually) we will change other files manually so this can be dropped into an existing project without messing everything up.
 
 ### Import Database
 
@@ -124,6 +124,14 @@ SimpleAuth comes with a small email sending library to automatically set the ema
 
 ```
 app/config/Email.php
+```
+
+### Load Helpers
+
+Simple auth uses some of Codeigniters helpers so we need to auto load them. These are loaded in the BaseController.php The included BaseControler already has these set for you.
+
+```
+protected $helpers = ['form', 'text','cookie'];
 ```
 
 ### Tool Bar (Optional)

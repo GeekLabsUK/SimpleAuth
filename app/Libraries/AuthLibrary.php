@@ -27,6 +27,9 @@ use \Config\Services;
     
 
 
+/**
+ * AuthLibrary
+ */
 class AuthLibrary
 {
     public function __construct()
@@ -330,8 +333,8 @@ class AuthLibrary
             $data = [
                 'id' => $user['id'],
                 'activated' => '1',
-                'activate_expire' => NULL, // RESET EXPIRY TIME
-                'activate_token' => NULL, // CLEAR OLD TOKEN FROM DB
+                'activate_expire' => null, // RESET EXPIRY TIME
+                'activate_token' => null, // CLEAR OLD TOKEN FROM DB
             ];
 
             // SAVE DATA TO DB

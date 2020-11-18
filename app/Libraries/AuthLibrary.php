@@ -244,13 +244,7 @@ class AuthLibrary
         // SEND DATA TO SEND EMAIL LIBRARY
         $result = $this->SendEmail->build($emaildata);
 
-        if ($result) {
-            $this->Session->setFlashData('success', lang('Auth.accountCreated'));
-            return true;
-        } else {
-            $this->Session->setFlashData('danger', lang('Auth.errorOccured'));
-            return false;
-        }
+        return $result;
     }
 
     /**

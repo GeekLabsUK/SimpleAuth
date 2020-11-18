@@ -211,7 +211,7 @@ You can also set the 'Remember Me Renew' setting to true or false. if set to tru
 When using the remember me function it can be benifitial to force some user to login. This ensures they are still authorised and still know or remember their login credentials.
 The setting can be set from 0 - 100. A setting of 10 for example would have a 10% chance of forcing the user to login.
 
-### Hash Algorithm
+### Hash Algorithm 
 
 As Codeigniter 4 needs a min of PHP 7.2 we should be using the latest standards where possible. SimpleAuth uses the ARGON2ID hashing algorithm by default. This requires PHP 7.3 and must have been compiled with Argon2 support.
 

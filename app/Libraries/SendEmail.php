@@ -1,25 +1,36 @@
 <?php
 
 /**
- * --------------------------------------------------------------------
- * CODEIGNITER 4 - EmailSender
- * --------------------------------------------------------------------
- *
- * This content is released under the MIT License (MIT)
- *
- * @package    EmailSender
- * @author     GeekLabs - Lee Skelding 
- * @license    https://opensource.org/licenses/MIT	MIT License
- * @link       https://github.com/GeekLabsUK/SimpleAuth
- * @since      Version 1.0
- * 
- */
+* --------------------------------------------------------------------
+* CODEIGNITER 4 - EmailSender
+* --------------------------------------------------------------------
+*
+* This content is released under the MIT License (MIT)
+*
+* @package    EmailSender
+* @author     GeekLabs <geeklabsonline@gmail.com>
+* @license    https://opensource.org/licenses/MIT	MIT License
+* @link       https://github.com/GeekLabsUK/SimpleAuth
+* @since      Version 1.0
+* @category   PHP
+* @php        7.3
+*
+*/
 
 namespace App\libraries;
 
+/**
+ * SendEmail
+ */
 class SendEmail
 {
-
+    
+    /**
+     * build
+     *
+     * @param  mixed $emaildata
+     * @return void
+     */
     public function build($emaildata)
     {
         $email = \Config\Services::email();              
@@ -34,9 +45,9 @@ class SendEmail
             $this->error = 'email not sent';
             return  false;
         }
-        else{
-            return  true;
-        }
+        
+        return  true;
+        
         
     }
 

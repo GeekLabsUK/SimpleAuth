@@ -133,13 +133,14 @@ class AuthLibrary
         if ($this->config->rememberMe && $rememberMe == '1') {
 
             $this->rememberMe($userID);
+            $this->Session->set('rememberme', $rememberMe);
         }       
 
         //SET USER SESSION 
-        $this->setUserSession($user, $rememberMe);
+        $this->setUserSession($user);
 
         // AUTO REDIRECTS BASED ON ROLE
-        $role = session()->get('role');
+        $role = $this->Session->get('role');
        
         $redirect = $this->config->assignRedirect;        
 
@@ -474,8 +475,8 @@ class AuthLibrary
      * @param  array $user
      * @return void
      */
-    public function setUserSession($user, $rememberMe)
-    {    
+    public function setUserSession($user)
+    {   
         $data = [
             'id' => $user['id'],
             'firstname' => $user['firstname'],
@@ -484,8 +485,6 @@ class AuthLibrary
             'role' => $user['role'],
             'isLoggedIn' => true,
             'ipaddress' => $this->request->getIPAddress(),
-            'rememberme' => $rememberMe,
-
         ];
 
         $this->Session->set($data);
@@ -540,23 +539,23 @@ class AuthLibrary
         // FIND USER BY EMAIL
         $user = $this->AuthModel->where('email', $email)
             ->first();
-
+        
         if (!empty($user)) {
 
-            // BUILD DATA TO ADD TO auth_logins TABLE
+        // BUILD DATA TO ADD TO auth_logins TABLE
             $logdata = [
-                'user_id' => $user['id'],
-                'firstname' => $user['firstname'],
-                'lastname' => $user['lastname'],
-                'role' => $user['role'],
-                'ip_address' => $this->request->getIPAddress(),
-                'date' => new Time('now'),
-                'successfull' => '0',
-            ];
+            'user_id' => $user['id'],
+            'firstname' => $user['firstname'],
+            'lastname' => $user['lastname'],
+            'role' => $user['role'],
+            'ip_address' => $this->request->getIPAddress(),
+            'date' => new Time('now'),
+            'successfull' => '0',
+        ];
 
             // SAVE LOG DATA TO DB
             $this->AuthModel->LogLogin($logdata);
-        }
+        }          
     }
 
     /**

@@ -56,6 +56,7 @@ $routes->get('/', 'Home::index');
 $routes->group('', ['filter' => 'auth:Role,1'], function ($routes) {
 
 	$routes->get('superadmin', 'superadmin::index'); // SUPER ADMIN DASHBOARD
+	$routes->match(['get', 'post'], 'superadmin/profile', 'Auth::profile'); 
 
 });
 
@@ -69,10 +70,8 @@ $routes->group('', ['filter' => 'auth:Role,1'], function ($routes) {
 $routes->group('', ['filter' => 'auth:Role,2'], function ($routes){
 
 	$routes->get('dashboard', 'Dashboard::index'); // ADMIN DASHBOARD
-	$routes->match(['get', 'post'], 'profile', 'Auth::profile'); // EDIT PROFILE PAGE
-	
+	$routes->match(['get', 'post'], 'dashboard/profile', 'Auth::profile');
 });
-
 
 /**
  * --------------------------------------------------------------------

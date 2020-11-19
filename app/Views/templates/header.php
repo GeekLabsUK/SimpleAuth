@@ -28,7 +28,7 @@
                             <a class="nav-link" href="/dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item <?= ($uri->getSegment(1) == 'profile' ? 'active' : null) ?>">
-                            <a class="nav-link" href="/profile">Profile </a>
+                            <a class="nav-link" href="/dashboard/profile">Profile </a>
                         </li>
                     </ul>
                     <ul class="navbar-nav my-2 my-lg-0">

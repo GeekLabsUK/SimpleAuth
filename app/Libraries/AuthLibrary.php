@@ -202,6 +202,30 @@ class AuthLibrary
 
     /**
      *--------------------------------------------------------------------------
+     * EDIT PROFILE
+     *--------------------------------------------------------------------------
+     *
+     * Process edit profile
+     * 
+     * @param  array $user
+     * @return void
+     */
+    public function editProfile($user)
+    {
+        // SAVE TO DB
+        $this->AuthModel->save($user);
+
+        // SAVE USER DATA IN SESSION
+        $this->setUserSession($user);
+
+        // SET FLASH DATA
+        $this->Session->setFlashData('success', lang('Auth.successUpdate'));
+        
+        return;
+    }
+
+    /**
+     *--------------------------------------------------------------------------
      * ACTIVATE EMAIL
      *--------------------------------------------------------------------------
      *

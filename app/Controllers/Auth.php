@@ -242,15 +242,7 @@ class Auth extends BaseController
 					$user['password'] = $this->request->getVar('password');
 				}
 
-				// SAVE TO DB
-				$this->AuthModel->save($user);
-
-				// SAVE USER DATA IN SESSION
-				$this->Auth->setUserSession($user);
-
-				// SET FLASH DATA
-				$this->Session->setFlashData('success', lang('Auth.successUpdate'));
-							
+				$this->Auth->editProfile($user);
 
 				return redirect()->to($this->Auth->autoRedirect() . '/profile');
 			}

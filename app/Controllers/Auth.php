@@ -246,11 +246,9 @@ class Auth extends BaseController
 
 				return redirect()->to($this->Auth->autoRedirect() . '/profile');
 			}
-		}
+		}		
 
-		$data['user'] = $this->AuthModel->where('id', $this->Session->get('id'))->first();
-
-		echo view('templates/header', $data);
+		echo view('templates/header');
 		echo view('profile');
 		echo view('templates/footer');
 	}

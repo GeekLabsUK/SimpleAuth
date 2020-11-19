@@ -12,7 +12,8 @@
 
 <body>
     <?php $uri = service('uri') ?>
-    <?php $config = config('Auth'); ?>
+    <?php $this->config = config('Auth');
+    $redirect = $this->config->assignRedirect; ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">Login System</a>
@@ -25,17 +26,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item <?= ($uri->getSegment(1) == 'dashboard' ? 'active' : null) ?>">
-                            <a class="nav-link" href="/dashboard">Dashboard</a>
+                            <a class="nav-link" href="<?php echo $redirect[session()->get('role')] ?>">Dashboard</a>
                         </li>
                         <li class="nav-item <?= ($uri->getSegment(1) == 'profile' ? 'active' : null) ?>">
-                            <a class="nav-link" href="/dashboard/profile">Profile </a>
+                            <a class="nav-link" href="<?php echo $redirect[session()->get('role')] ?>/profile">Profile </a>
                         </li>
                     </ul>
                     <ul class="navbar-nav my-2 my-lg-0">
-                        <?php if ($config->lockScreen) : ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/lockscreen">Lock </a>
-                        </li>
+                        <?php if ($this->config->lockScreen) : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/lockscreen">Lock </a>
+                            </li>
                         <?php endif; ?>
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">Logout </a>

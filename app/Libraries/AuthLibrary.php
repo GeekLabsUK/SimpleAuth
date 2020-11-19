@@ -137,14 +137,7 @@ class AuthLibrary
         }       
 
         //SET USER SESSION 
-        $this->setUserSession($user);
-
-        // AUTO REDIRECTS BASED ON ROLE
-        $role = $this->Session->get('role');
-       
-        $redirect = $this->config->assignRedirect;        
-
-        return  $redirect[$role];
+        $this->setUserSession($user);       
     }
 
     /**
@@ -792,5 +785,15 @@ class AuthLibrary
         $this->Session->destroy();
 
         return;
+    }
+
+    public function autoredirect()
+    {
+
+        // AUTO REDIRECTS BASED ON ROLE 
+        $redirect = $this->config->assignRedirect;
+
+        return  $redirect[$this->Session->get('role')];
+
     }
 }

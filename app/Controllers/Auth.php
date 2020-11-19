@@ -85,10 +85,10 @@ class Auth extends BaseController
 				$rememberMe = $this->request->getVar('rememberme');			
 
 				// LOG USER IN USING EMAIL
-				$result = $this->Auth->Loginuser($email, $rememberMe);
+				$this->Auth->Loginuser($email, $rememberMe);
 
 				// REDIRECT 
-				return redirect()->to($result);
+				return redirect()->to($this->Auth->autoRedirect());
 				
 			}
 		}
@@ -250,8 +250,9 @@ class Auth extends BaseController
 
 				// SET FLASH DATA
 				$this->Session->setFlashData('success', lang('Auth.successUpdate'));
+							
 
-				return redirect()->to('/profile');
+				return redirect()->to($this->Auth->autoRedirect() . '/profile');
 			}
 		}
 

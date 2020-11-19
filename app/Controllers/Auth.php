@@ -84,7 +84,7 @@ class Auth extends BaseController
 				$email = $this->request->getVar('email');
 				$rememberMe = $this->request->getVar('rememberme');			
 
-				// LOG USER IN USING EMAIL
+				// PASS TO LIBRARY
 				$this->Auth->Loginuser($email, $rememberMe);
 
 				// REDIRECT 
@@ -140,7 +140,7 @@ class Auth extends BaseController
 					'password' => $this->request->getVar('password'),					
 				];				
 
-				// REGISTER USER
+				// PASS TO LIBRARY
 				$result = $this->Auth->RegisterUser($userData);	
 				
 				// CHECK RESULT
@@ -169,6 +169,7 @@ class Auth extends BaseController
 	public function resendactivation($id)
 	{
 
+		// PASS TO LIBRARY
 		$this->Auth->ResendActivation($id);		
 
 		return redirect()->to('/login');		
@@ -187,7 +188,7 @@ class Auth extends BaseController
 	public function activateUser($id, $token)
 	{
 	
-		// ACTIVATE USER
+		// PASS TO LIBRARY
 		$this->Auth->activateuser($id, $token);		
 
 		return redirect()->to('/');
@@ -242,6 +243,7 @@ class Auth extends BaseController
 					$user['password'] = $this->request->getVar('password');
 				}
 
+				// PASS TO LIBRARY
 				$this->Auth->editProfile($user);
 
 				return redirect()->to($this->Auth->autoRedirect() . '/profile');
@@ -289,12 +291,10 @@ class Auth extends BaseController
 			}
 
 			// VALIDATED
-			else {
+			else {			
 
-				// GET EMAIL FROM POST
-				$email = $this->request->getVar('email');
-
-				$this->Auth->ForgotPassword($email);
+				// PASS TO LIBRARY
+				$this->Auth->ForgotPassword($this->request->getVar('email'));
 				
 			}
 		}
@@ -315,7 +315,7 @@ class Auth extends BaseController
 	*/
 	public function resetPassword($id, $token)
 	{
-		// RESET PASSWORD 
+		// PASS TO LIBRARY
 		$id = $this->Auth->resetPassword($id, $token);
 		
 		// REDIRECT PASSING USER ID TO UPDATE PASSWORD FORM
@@ -357,17 +357,14 @@ class Auth extends BaseController
 					'reset_token' => NULL, // CLEAR OLD TOKEN 
 				];
 
-				// UPDATE DB
-				$this->AuthModel->save($user);
-
-				// SET SOME FLASH DATA
-				$this->Session->setFlashData('success', lang('Auth.resetSuccess'));
+				// PASS TO LIBRARY
+				$this->Auth->updatepassword($user);			
 
 				return redirect()->to('/login');
 			}
 		}
 
-		// SET USER ID TO PASS TO VIEW
+		// SET USER ID TO PASS TO VIEW AS THERE IS NO SESSION DATA TO ACCESS
 		$data = [
 			'id' => $id,
 		];
@@ -401,18 +398,15 @@ class Auth extends BaseController
                     $data['validation'] = $this->validator;
                 } else {
 
-                // GET EMAIL FROM POST
-                    $email = $this->request->getVar('email');
+					// GET EMAIL & REMEMBER ME FROM POST
+					$email = $this->request->getVar('email');
+					$rememberMe = $this->request->getVar('rememberme');	
 
                     // LOG USER IN USING EMAIL
-                    $result = $this->Auth->Loginuser($email);
+                    $this->Auth->Loginuser($email, $rememberMe);
 
-                    // CHECK RESULT REDIRECT TO DASHBOARD IF TRUE OR BACK TO LOGIN IF FALSE
-                    if ($result) {
-                        return redirect()->to('dashboard');
-                    }
-
-                    return redirect()->to('dashboard');
+					// REDIRECT 
+					return redirect()->to($this->Auth->autoRedirect());
                 }
             }
 

@@ -18,8 +18,7 @@
                 <?php endif; ?>
 
                 <p>Enter your new password</p>
-                <form class="" action="/updatepassword/<?= $id ?>" method="post">
-                    <input type="hidden" class="form-control" name="id" id="id" value="">
+                <form class="" action="/updatepassword/<?= $id ?>" method="post">                    
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" name="password" id="password" value="">

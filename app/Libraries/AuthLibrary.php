@@ -113,6 +113,7 @@ class AuthLibrary
      */
     public function LoginUser($email, $rememberMe)
     {
+       
         // GET USER DETAILS FROM DB
         $user = $this->AuthModel->where('email', $email)
             ->first();
@@ -134,7 +135,9 @@ class AuthLibrary
 
             $this->rememberMe($userID);
             $this->Session->set('rememberme', $rememberMe);
-        }       
+        } 
+        
+        $this->Session->set('lockscreen', false);
 
         //SET USER SESSION 
         $this->setUserSession($user);       
@@ -481,6 +484,23 @@ class AuthLibrary
         return;
     }
 
+    /**
+     *--------------------------------------------------------------------------
+     * UPDATE PASSWORD
+     *--------------------------------------------------------------------------
+     *
+     * @param  array $user
+     * @return void
+     */
+    public function updatePassword($user)
+    {
+        // UPDATE DB
+        $this->AuthModel->save($user);
+
+        // SET SOME FLASH DATA
+        $this->Session->setFlashData('success', lang('Auth.resetSuccess'));
+    }
+
 
     /**
      *--------------------------------------------------------------------------
@@ -663,6 +683,11 @@ class AuthLibrary
      */
     public function checkCookie()
     {
+        if ($this->Session->get('lockscreen') == true){
+           
+           
+            return;
+        }
         // IS THERE A COOKIE SET?
         $remember = get_cookie('remember');
 
@@ -786,6 +811,7 @@ class AuthLibrary
         if ($this->config->lockScreen) {
 
             $this->Session->set('isLoggedIn', false);
+            $this->Session->set('lockscreen', true);
 
             return true;
         }

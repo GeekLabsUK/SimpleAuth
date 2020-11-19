@@ -21,9 +21,10 @@
                 <?php endif; ?>
 
                 <form class="" action="/login" method="post">
-                                           
+
                     <input type="hidden" class="form-control" name="email" id="email" value="<?= session()->get('email') ?>">
-                        
+                    <input type="hidden" class="form-control" name="rememberme" id="rememberme" value="<?= session()->get('rememberme') ?>">
+
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" name="password" id="password" value="">
@@ -32,13 +33,13 @@
                                 <?= $error = $validation->getError('password'); ?>
                             </div>
                         <?php } ?>
-                    </div>                  
+                    </div>
 
                     <div class="row">
                         <div class="col-12 col-sm-4">
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
-                        
+
                     </div>
                 </form>
             </div>

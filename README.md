@@ -233,6 +233,39 @@ It is reccomended to use Argon2 where possible but you can also use :
 * - PASSWORD_ARGON2I  - As of PHP 7.2 
 * - PASSWORD_ARGON2ID - As of PHP 7.3 (default)
 
+### Auto Redirection
+
+SimpleAuth has got an auto redirection or auto re-routing system built in. The main purpose is dynamically set up redirects to the correct parts of your website / application.
+
+For example in the profile.php view we need to ensure when a user updates their details it is directed to the correct controller for the user role. If the user is signed in as a super admin they would need to be redirected to the super admin section of the site. We could do this by having 2 seperate profile.php views for different types of roles but the purpose of using auto redirects is we set them up once in the Auth.php config file and forget about them.
+
+For the purpose of the above example the profile.php view would first need to pull in the config file setting using:
+
+```
+$this->config = config('Auth'); $redirect = $this->config->assignRedirect;
+```
+
+What we are doing here is accessing the Auth.php config file and setting the variable $redirect with our redirects that we assigned. the $redirect variable is an array of the redirects accesseble using the key which just happens to be the users role. So to ensure we populate the correct entry from the array we simply call in the role from the session like :
+
+```
+<form class="" action="<?php echo $redirect[session()->get('role')] ?>/profile" method="post">
+```
+
+We can also use the auto redirect with our controllers. In the example Auth.php controler you can see for the login() method the redirect is set as :
+
+```
+return redirect()->to($this->Auth->autoRedirect());
+```
+
+So when a user is logged in they are directed to their respective areas of the site as configured in the Auth.php config file. 
+
+### Library Methods
+
+The majority of SimpleAuth's logic resides in the Authlibrary.php file. this allows us to build our controllers out easily. The included controller is fine for 99% of use cases but if you do want to modify or extend the controller you can do so. A list of all the available methods are detailed below.
+
+methods to be added soon...
+
+
 
 
 

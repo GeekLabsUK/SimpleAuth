@@ -18,7 +18,7 @@
 namespace App\Controllers;
 
 use App\Models\AuthModel;
-use App\libraries\AuthLibrary;
+use App\Libraries\AuthLibrary;
 
 class Auth extends BaseController
 {

@@ -15,11 +15,11 @@
  * 
  */
 
-namespace App\libraries;
+namespace App\Libraries;
 
 use CodeIgniter\I18n\Time;
 use App\Models\AuthModel;
-use App\libraries\SendEmail;
+use App\Libraries\SendEmail;
 use Config\Auth;
 use Config\Email;
 use Config\App;

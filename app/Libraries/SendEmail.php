@@ -17,7 +17,7 @@
 *
 */
 
-namespace App\libraries;
+namespace App\Libraries;
 
 /**
  * SendEmail

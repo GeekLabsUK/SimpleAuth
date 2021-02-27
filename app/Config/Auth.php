@@ -24,6 +24,23 @@ class Auth extends BaseConfig
 
     /**
      * --------------------------------------------------------------------
+     * Allow Register
+     * --------------------------------------------------------------------
+     *
+     * You can turn on or off the registration page.
+     * 
+     * The default setting is true, where the registration page will appear.
+     * When this is set to false, a notice will appear instead of the
+     * registration page.
+     * 
+     * You can also override this from .env file with auth.allowRegister
+     * 
+     * @var array
+     */
+    public $allowRegister = true;
+
+    /**
+     * --------------------------------------------------------------------
      * Assign User Roles
      * --------------------------------------------------------------------
      *

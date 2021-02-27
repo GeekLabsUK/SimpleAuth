@@ -118,6 +118,11 @@ class Auth extends BaseController
 		// IF ITS A POST REQUEST DO YOUR STUFF ELSE SHOW VIEW
 		if ($this->request->getMethod() == 'post') {
 
+			// PREVENT REGISTRATION ATTEMPT WHEN ALLOW-REGISTER IS TURNED OFF
+			if ($this->config->allowRegister === false) {
+				return redirect()->to('/register');
+			}
+
 			// SET RULES
 			$rules = [
 				'firstname' => 'required|min_length[3]|max_length[25]',

@@ -18,7 +18,7 @@
 namespace App\Controllers;
 
 use App\Models\AuthModel;
-use App\libraries\AuthLibrary;
+use App\Libraries\AuthLibrary;
 
 class Auth extends BaseController
 {
@@ -117,6 +117,11 @@ class Auth extends BaseController
 
 		// IF ITS A POST REQUEST DO YOUR STUFF ELSE SHOW VIEW
 		if ($this->request->getMethod() == 'post') {
+
+			// PREVENT REGISTRATION ATTEMPT WHEN ALLOW-REGISTER IS TURNED OFF
+			if ($this->config->allowRegister === false) {
+				return redirect()->to('/register');
+			}
 
 			// SET RULES
 			$rules = [

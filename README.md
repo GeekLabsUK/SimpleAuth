@@ -1,4 +1,4 @@
-![image code score](https://www.code-inspector.com/project/16385/score/svg) ![image code grade](https://www.code-inspector.com/project/16385/status/svg)
+![image code score](https://api.codiga.io/project/16385/score/svg) ![image code grade](https://api.codiga.io/project/16385/status/svg)
 
 # SimpleAuth
 A simple Auth library for Codeigniter 4

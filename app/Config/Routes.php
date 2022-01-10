@@ -55,7 +55,7 @@ $routes->get('/', 'Home::index');
 
 $routes->group('', ['filter' => 'auth:Role,1'], function ($routes) {
 
-	$routes->get('superadmin', 'superadmin::index'); // SUPER ADMIN DASHBOARD
+	$routes->get('superadmin', 'Superadmin::index'); // SUPER ADMIN DASHBOARD
 	$routes->match(['get', 'post'], 'superadmin/profile', 'Auth::profile'); 
 
 });

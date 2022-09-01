@@ -5,7 +5,7 @@ A simple Auth library for Codeigniter 4
 
 SimpleAuth is small lightweight Auth library for Codeigniter 4 with powerfull features
 
-Designed to be easy to instal, customise and expand upon. Using a modular approach its easy to to use all of the library or just the bits you need making it very flexible and easy to integrate.
+Designed to be easy to install, customise and expand upon. Using a modular approach its easy to to use all of the library or just the bits you need making it very flexible and easy to integrate.
 
 ## Simple Auth Beta
 

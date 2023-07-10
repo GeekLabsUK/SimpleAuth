@@ -41,6 +41,14 @@ Designed to be easy to instal, customise and expand upon. Using a modular approa
     * Dashboard.php
     * Home.php
     * Superadmin.php
+* Database
+    * Migrations
+      * 20210708160915_create_auth_logins_table.php
+      * 20210708160915_create_auth_tokens_table.php
+      * 20210708160915_create_user_roles_table.php
+      * 20210708160915_create_users_table.php
+    * Seeds
+      * UserSeeder.php
 * Filters
     * Auth.php
 * Language
@@ -82,7 +90,11 @@ Dowload the package and extract into your project route. There are no files that
 
 Create your database and import
 ```
-db.sql
+php spark migrate --all
+```
+Create demo users
+```
+php spark db:seed UserSeeder
 ```
 
 ## Configuration
